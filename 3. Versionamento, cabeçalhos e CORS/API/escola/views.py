@@ -1,6 +1,6 @@
 from rest_framework import viewsets, generics
-from escola.models import Aluno, Curso, Matricula
-from escola.serializer import AlunoSerializer, AlunoSerializerV2, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer, ListaAlunosMatriculadosSerializer
+from escola.models import Aluno, Curso, Matricula, Imagem
+from escola.serializer import AlunoSerializer, AlunoSerializerV2, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer, ListaAlunosMatriculadosSerializer, ImagemSerializer
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from rest_framework.response import Response
@@ -48,3 +48,7 @@ class ListaAlunosMatriculados(generics.ListAPIView):
         queryset = Matricula.objects.filter(curso_id=self.kwargs['pk'])
         return queryset
     serializer_class = ListaAlunosMatriculadosSerializer
+
+class ImagemViewSet(viewsets.ModelViewSet):
+    queryset = Imagem.objects.all()
+    serializer_class = ImagemSerializer
